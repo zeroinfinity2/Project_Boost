@@ -201,8 +201,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5128243545981829267}
   - component: {fileID: 1100186933}
-  - component: {fileID: 1100186934}
   - component: {fileID: 3300024068270373853}
+  - component: {fileID: 4165803174872933095}
   m_Layer: 0
   m_Name: RocketShip
   m_TagString: Untagged
@@ -244,20 +244,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 0
---- !u!114 &1100186934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5128243545981829266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeeea7a6bcaaccc4ea841704b3ce4a34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rcsThrust: 150
-  _thrustForce: 1000
 --- !u!82 &3300024068270373853
 AudioSource:
   m_ObjectHideFlags: 0
@@ -268,7 +254,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cd444812242de2448a1ee22170b4d988, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.535
   m_Pitch: 0.8
@@ -354,6 +340,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4165803174872933095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5128243545981829266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeeea7a6bcaaccc4ea841704b3ce4a34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelManager: {fileID: 5272428795514770953, guid: 5fa14d9f70269a2459a007fd4bc5cf0c, type: 3}
+  _rcsThrust: 80
+  _thrustForce: 1000
+  _mainEngine: {fileID: 8300000, guid: 5235e211a0262ef4eaefa4637b680f42, type: 3}
+  _explosion: {fileID: 8300000, guid: ce7342dd480bf804c8f7d0793482bceb, type: 3}
+  _levelLoad: {fileID: 8300000, guid: d4b43acce54c8fc4c85c9b1f49fb07fb, type: 3}
 --- !u!1 &5128243547163319160
 GameObject:
   m_ObjectHideFlags: 0
