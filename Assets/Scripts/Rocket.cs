@@ -30,6 +30,15 @@ public class Rocket : MonoBehaviour
     [SerializeField]
     private AudioClip _levelLoad;
 
+    [SerializeField]
+    private ParticleSystem _mainEngineParticles;
+    [SerializeField]
+    private ParticleSystem _explosionParticles;
+    [SerializeField]
+    private ParticleSystem _levelLoadParticles;
+
+    private float _levelTimer = 2f;
+
     enum State
     {
         Alive,
@@ -47,7 +56,7 @@ public class Rocket : MonoBehaviour
         _rigidBody = this.transform.GetComponent<Rigidbody>();
         _rocketAudio = this.transform.GetComponent<AudioSource>();
 
-        
+
     }
 
     // Update is called once per frame
@@ -88,6 +97,7 @@ public class Rocket : MonoBehaviour
         else
         {
             _rocketAudio.Stop();
+            _mainEngineParticles.Stop();
         }
     }
 
@@ -98,6 +108,7 @@ public class Rocket : MonoBehaviour
         {
             _rocketAudio.PlayOneShot(_mainEngine);
         }
+        _mainEngineParticles.Play();
     }
 
     private void OnCollisionEnter(Collision other)
@@ -106,26 +117,38 @@ public class Rocket : MonoBehaviour
         {
             return;
         }
-        
+
         switch (other.gameObject.tag)
         {
             case "Friendly":
-                Debug.Log("Ok");
+                //do nothing
                 break;
             case "Finish":
-                state = State.Transcending;
-                _rocketAudio.Stop();
-                _rocketAudio.PlayOneShot(_levelLoad);
-                Invoke("IncreaseLevel", 1f);
+                StartSuccessSequence();
                 break;
             default:
-                state = State.Dying;
-                _rocketAudio.Stop();
-                _rocketAudio.PlayOneShot(_explosion);
-                Invoke("DecreaseLevel", 1f);
-                Debug.Log("ded");
+                StartDeathSequence();
                 break;
         }
+    }
+
+    private void StartDeathSequence()
+    {
+        state = State.Dying;
+        _rocketAudio.Stop();
+        _rocketAudio.PlayOneShot(_explosion);
+        _explosionParticles.Play();
+        Invoke("DecreaseLevel", _levelTimer);
+        Debug.Log("ded");
+    }
+
+    private void StartSuccessSequence()
+    {
+        state = State.Transcending;
+        _rocketAudio.Stop();
+        _rocketAudio.PlayOneShot(_levelLoad);
+        _levelLoadParticles.Play();
+        Invoke("IncreaseLevel", _levelTimer);
     }
 
     private void IncreaseLevel()
@@ -134,7 +157,7 @@ public class Rocket : MonoBehaviour
 
     }
 
-    private void DecreaseLevel() 
+    private void DecreaseLevel()
     {
         _levelManager.DecreaseLevel();
     }
